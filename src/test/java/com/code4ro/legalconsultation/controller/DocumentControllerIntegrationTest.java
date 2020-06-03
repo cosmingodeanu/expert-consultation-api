@@ -123,7 +123,30 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
                 .content(Jackson.toJsonString(secondDocument))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
 
+    @Test
+    @WithMockUser
+    @Transactional
+    public void saveDocumentDuplicatedTitle() throws Exception {
+        final File file = PdfFileFactory.getAsFiles(getClass().getClassLoader()).get(0);
+        final DocumentViewDto firstDocument = RandomObjectFiller.createAndFill(DocumentViewDto.class);
+        firstDocument.setFilePath(file.getPath());
+
+        mvc.perform(post("/api/documents")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(Jackson.toJsonString(firstDocument))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        final DocumentViewDto secondDocument = RandomObjectFiller.createAndFill(DocumentViewDto.class);
+        secondDocument.setDocumentTitle(firstDocument.getDocumentTitle());
+
+        mvc.perform(post("/api/documents")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(Jackson.toJsonString(secondDocument))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     private void assertThatDocumentNodeTreeIsGeneratedCorrectly(final DocumentNode document) {

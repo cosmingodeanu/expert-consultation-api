@@ -1,5 +1,7 @@
 package com.code4ro.legalconsultation.model.persistence;
 
+import com.code4ro.legalconsultation.model.dto.dtoValidators.UniqueDocumentNodeContentConstraint;
+import com.code4ro.legalconsultation.model.dto.dtoValidators.UniqueDocumentNodeTitleConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -26,9 +28,11 @@ public class DocumentNode extends BaseEntity {
     private DocumentNodeType documentNodeType;
 
     @Column(name = "title")
+    @UniqueDocumentNodeTitleConstraint
     private String title;
 
     @Column(columnDefinition = "TEXT")
+    @UniqueDocumentNodeContentConstraint
     private String content;
 
     @Column(name = "identifier")

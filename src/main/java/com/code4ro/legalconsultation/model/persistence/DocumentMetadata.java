@@ -1,5 +1,6 @@
 package com.code4ro.legalconsultation.model.persistence;
 
+import com.code4ro.legalconsultation.model.dto.dtoValidators.UniqueDocumentTitleConstraint;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ public class DocumentMetadata extends BaseEntity {
     private BigInteger documentNumber;
 
     @Column(name = "document_title", nullable=false)
+    @UniqueDocumentTitleConstraint
     private String documentTitle;
 
     @Column(name = "document_initializer", nullable=false)

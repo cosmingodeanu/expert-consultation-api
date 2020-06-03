@@ -8,4 +8,8 @@ import java.util.UUID;
 
 @Repository
 public interface DocumentNodeRepository extends JpaRepository<DocumentNode, UUID> {
+
+    Boolean existsByTitle(String title);
+
+    Boolean existsByContent(String content);
 }

@@ -2,6 +2,7 @@ package com.code4ro.legalconsultation.model.dto;
 
 import com.code4ro.legalconsultation.model.dto.dtoValidators.UniqueDocumentFilePath;
 import com.code4ro.legalconsultation.model.dto.dtoValidators.UniqueDocumentNumberConstraint;
+import com.code4ro.legalconsultation.model.dto.dtoValidators.UniqueDocumentTitleConstraint;
 import com.code4ro.legalconsultation.model.persistence.DocumentType;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class DocumentViewDto {
     private BigInteger documentNumber;
 
     @NotNull(message = "document.save.title.null")
+    @UniqueDocumentTitleConstraint
     private String documentTitle;
 
     @NotNull(message = "document.save.initializer.null")
