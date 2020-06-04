@@ -13,7 +13,6 @@ public class DocumentMetadataTitleValidator implements ConstraintValidator<Uniqu
 
     @Override
     public boolean isValid(String title, ConstraintValidatorContext constraintValidatorContext) {
-        System.out.println("title ===="+title);
         return !documentMetadataRepository.existsByDocumentTitle(title);
     }
 }

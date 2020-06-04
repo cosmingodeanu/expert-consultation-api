@@ -1,5 +1,6 @@
 package com.code4ro.legalconsultation.model.dto;
 
+import com.code4ro.legalconsultation.model.dto.dtoValidators.UniqueDocumentTitleConstraint;
 import com.code4ro.legalconsultation.model.persistence.DocumentType;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Setter
 public class DocumentMetadataDto extends BaseEntityDto {
     private BigInteger documentNumber;
+    @UniqueDocumentTitleConstraint
     private String documentTitle;
     private String documentInitializer;
     private DocumentType documentType;
